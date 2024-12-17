@@ -1,15 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:untitled/modles/countryModel/countryModel.dart';
-
+import 'package:untitled/utills/resources/baseWidgets/base_textfield.dart';
 import '../../views_model/search_controller/search_controller.dart';
 import 'package:get/get.dart';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart'; // Assume your controller is in this file
-
 class CountrySearchApp extends StatelessWidget {
+  CountrySearchApp({super.key});
   final CountryController controller = Get.put(CountryController());
 
   @override
@@ -29,29 +24,17 @@ class CountrySearchApp extends StatelessWidget {
               final country = controller.selectedCountry.value;
               return Column(
                 children: [
-                  TextField(
-                      controller: controller.searchController.value,
+                  BaseTextField(
+                      hintText: "Search for a country...",
+                      textController: controller.searchController.value,
                       onChanged: controller.onSearchChanged,
-                      decoration: InputDecoration(
-                        hintText: "Search for a country...",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        filled: true,
-                        fillColor: Colors.grey[100],
-                        suffixIcon: InkWell(
-                          onTap: () {
-                            FocusScope.of(context).unfocus();
-                            controller.isHide.value = true;
-                            controller.fetchCountries();
-                          },
-                          child: const Icon(
-                            Icons.search,
-                            color: Colors.teal,
-                          ),
-                        ),
-                      ),
-                    ),
+                    onSuffixIcon: Icons.search,
+                    onSuffixIconPressed: () {
+                FocusScope.of(context).unfocus();
+                controller.isHide.value = true;
+                controller.fetchCountries();
+              },
+                  ),
                   const SizedBox(height: 10),
                   if(controller.isHide.value)
                     Container(
@@ -122,7 +105,7 @@ class CountrySearchApp extends StatelessWidget {
                     Card(
                       elevation: 3,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(12),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -161,7 +144,6 @@ class CountrySearchApp extends StatelessWidget {
                         ),
                       ),
                     ),
-
                 ],
               );
             }),
