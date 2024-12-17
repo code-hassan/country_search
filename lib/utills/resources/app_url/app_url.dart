@@ -1,3 +1,3 @@
 class AppUrl {
-  static const String baseUrl = "https://ocr-api.edxconnect.com/api";
+  static const String countrySearchApiUrl = "https://restcountries.com/v3.1/name/";
 }
